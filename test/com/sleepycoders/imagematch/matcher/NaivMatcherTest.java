@@ -57,7 +57,11 @@ public class NaivMatcherTest {
     @Test
     public void testEquals() throws Exception {
         BufferedImage[] images = createTestImages();
-        NaivMatcher matcher = new NaivMatcher();
-        assertTrue(matcher.equals(images[0], images[0]));
+        IMatcher matcher = new NaivMatcher();
+        List<MatchResult> matches = matcher.match(images[0], images[0]);
+        assertTrue(matches.size() == 1);
+        MatchResult r = matches.get(0);
+        assertTrue(r.x == 0 && r.y == 0 && r.likeness == 1);
+    }
     }
 }
