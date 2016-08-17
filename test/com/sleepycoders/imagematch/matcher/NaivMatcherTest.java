@@ -63,5 +63,19 @@ public class NaivMatcherTest {
         MatchResult r = matches.get(0);
         assertTrue(r.x == 0 && r.y == 0 && r.likeness == 1);
     }
+
+    /**
+     * You cannot create 0 width/height BufferedImage's
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testEmpty() throws Exception {
+        BufferedImage empty = new BufferedImage(0, 0, BufferedImage.TYPE_INT_RGB);
+
+        // our matching would work with 0 size images, if it wasn't for BufferedImage's problem
+        IMatcher matcher = new NaivMatcher();
+        List<MatchResult> matches = matcher.match(empty, empty);
+        assertTrue(matches.size() == 1);
+        MatchResult r = matches.get(0);
+        assertTrue(r.x == 0 && r.y == 0 && r.likeness == 1);
     }
 }
