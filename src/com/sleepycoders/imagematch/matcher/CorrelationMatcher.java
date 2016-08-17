@@ -1,9 +1,9 @@
 package com.sleepycoders.imagematch.matcher;
 
+import com.sleepycoders.imagematch.image.Image;
 import com.sleepycoders.imagematch.metric.IMetric;
 import com.sleepycoders.imagematch.metric.NormalizedColorDifferenceMetric;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class CorrelationMatcher implements IMatcher {
      * @return List of matches, with the displacements and likeness factors
      */
     @Override
-    public List<MatchResult> match(final BufferedImage src, final BufferedImage sub) {
+    public List<MatchResult> match(final Image src, final Image sub) {
         return match(src, sub, 0.9f);
     }
 
@@ -29,7 +29,7 @@ public class CorrelationMatcher implements IMatcher {
      * @return List of matches, with the displacements and likeness factors
      */
     @Override
-    public List<MatchResult> match(final BufferedImage src, final BufferedImage sub, final float likenessThreshold) {
+    public List<MatchResult> match(final Image src, final Image sub, final float likenessThreshold) {
         return match(src, sub, likenessThreshold, new NormalizedColorDifferenceMetric());
     }
 
@@ -39,8 +39,7 @@ public class CorrelationMatcher implements IMatcher {
      * @param metric must be normalized metric
      * @return List of matches, with the displacements and likeness factors
      */
-    public List<MatchResult> match(final BufferedImage src, final BufferedImage sub, final float likenessThreshold, final IMetric metric) {
-
+    public List<MatchResult> match(final Image src, final Image sub, final float likenessThreshold, final IMetric metric) {
         if(src == null || sub == null) { return NO_MATCH; }
         List<MatchResult> matches = new ArrayList<>();
 
@@ -61,7 +60,7 @@ public class CorrelationMatcher implements IMatcher {
         for (int y = 0; y <= h - kh; y++) {
             for (int x = 0; x <= w - kw; x++) {
                 // does not copy, instead just provides a sliced view on the underlying data
-                BufferedImage window = src.getSubimage(x, y, kw, kh);
+                Image window = src.getSubimage(x, y, kw, kh);
                 float diff = metric.calculate(window, sub);
                 float likeness = 1 - diff;
 

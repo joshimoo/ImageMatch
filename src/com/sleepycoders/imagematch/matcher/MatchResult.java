@@ -8,7 +8,7 @@ public class MatchResult {
     public final int y;
     public final float likeness;
 
-    MatchResult(int xDisplacement, int yDisplacement, float likeness) {
+    MatchResult(final int xDisplacement, final int yDisplacement, final float likeness) {
         this.x = xDisplacement;
         this.y = yDisplacement;
         this.likeness = likeness;
@@ -19,12 +19,12 @@ public class MatchResult {
      * @param xDisplacement how far to offset the sub image (starting from top left corner) to fit the src image
      * @param yDisplacement how far to offset the sub image (starting from top left corner) to fit the src image
      */
-    MatchResult(int xDisplacement, int yDisplacement) {
-        this(xDisplacement, yDisplacement, 1);
+    MatchResult(final int xDisplacement, final int yDisplacement) {
+        this(xDisplacement, yDisplacement, 1.0f);
     }
 
     @Override
     public String toString() {
-        return String.format("xOffset: %s yOffset: %s likeness: %s%n", this.x, this.y, this.likeness);
+        return String.format("xOffset: %d yOffset: %d likeness: %f%n", this.x, this.y, this.likeness);
     }
 }

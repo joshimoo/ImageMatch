@@ -1,13 +1,13 @@
 package com.sleepycoders.imagematch.metric;
 
-import java.awt.image.BufferedImage;
+import com.sleepycoders.imagematch.image.Image;
 
 /**
  * @author Joshua Moody (joshimoo@hotmail.de)
  */
 public class NormalizedColorDifferenceMetric extends ColorDifferenceMetric {
     @Override
-    public float calculate(BufferedImage a, BufferedImage b) {
+    public float calculate(Image a, Image b) {
         float sum = super.calculate(a, b);
         int maxColorDifference = 255;
         int colorChannels = 3;

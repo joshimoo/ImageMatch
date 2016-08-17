@@ -1,6 +1,7 @@
 package com.sleepycoders.imagematch.matcher;
 
 import org.junit.Test;
+import com.sleepycoders.imagematch.image.Image;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -11,16 +12,12 @@ import static org.junit.Assert.*;
  */
 public class NaivMatcherTest {
 
-    BufferedImage[] createTestImages() {
+    Image[] createTestImages() {
 
         // src, sub, mismatch
         BufferedImage[] images = new BufferedImage[3];
         BufferedImage src = new BufferedImage(200, 200, BufferedImage.TYPE_BYTE_GRAY);
         BufferedImage mismatch = new BufferedImage(50, 50, BufferedImage.TYPE_BYTE_GRAY);
-
-        images[0] = src;
-        images[1] = src.getSubimage(100, 100, 50, 50);
-        images[2] = mismatch;
 
         // todo: create sample images or load via file
         for (int y = 0; y < src.getHeight(); y++) {
@@ -30,12 +27,14 @@ public class NaivMatcherTest {
             }
         }
 
-        return images;
+        // src.getSubimage(100, 100, 50, 50)
+        Image wrapper = new Image(src);
+        return new Image[] { wrapper, wrapper.getSubimage(100, 100, 50, 50), new Image(mismatch)};
     }
 
     @Test
     public void testMatch() throws Exception {
-        BufferedImage[] images = createTestImages();
+        Image[] images = createTestImages();
         IMatcher matcher = new NaivMatcher();
         List<MatchResult> matches = matcher.match(images[0], images[1], 1);
 
@@ -47,7 +46,7 @@ public class NaivMatcherTest {
 
     @Test
     public void testNoMatch() throws Exception {
-        BufferedImage[] images = createTestImages();
+        Image[] images = createTestImages();
         IMatcher matcher = new NaivMatcher();
         List<MatchResult> matches = matcher.match(images[0], images[2], 1);
 
@@ -56,7 +55,7 @@ public class NaivMatcherTest {
 
     @Test
     public void testEquals() throws Exception {
-        BufferedImage[] images = createTestImages();
+        Image[] images = createTestImages();
         IMatcher matcher = new NaivMatcher();
         List<MatchResult> matches = matcher.match(images[0], images[0]);
         assertTrue(matches.size() == 1);
@@ -69,7 +68,7 @@ public class NaivMatcherTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testEmpty() throws Exception {
-        BufferedImage empty = new BufferedImage(0, 0, BufferedImage.TYPE_INT_RGB);
+        Image empty = new Image(new BufferedImage(0, 0, BufferedImage.TYPE_INT_RGB));
 
         // our matching would work with 0 size images, if it wasn't for BufferedImage's problem
         IMatcher matcher = new NaivMatcher();

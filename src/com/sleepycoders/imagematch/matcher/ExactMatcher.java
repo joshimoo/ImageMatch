@@ -1,6 +1,7 @@
 package com.sleepycoders.imagematch.matcher;
 
-import java.awt.image.BufferedImage;
+import com.sleepycoders.imagematch.image.Image;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class ExactMatcher implements IMatcher {
      * @return emptyList or list with single element match result
      */
     @Override
-    public List<MatchResult> match(final BufferedImage src, final BufferedImage sub) {
+    public List<MatchResult> match(final Image src, final Image sub) {
         if (src.getWidth() != sub.getWidth() || src.getHeight() != sub.getHeight()) { return NO_MATCH; }
 
         for (int y = 0; y < src.getHeight(); y++) {
@@ -37,7 +38,7 @@ public class ExactMatcher implements IMatcher {
      * @return emptyList or list with single element match result
      */
     @Override
-    public List<MatchResult> match(final BufferedImage src, final BufferedImage sub, final float likenessThreshold) {
+    public List<MatchResult> match(final Image src, final Image sub, final float likenessThreshold) {
         return match(src, sub);
     }
 }

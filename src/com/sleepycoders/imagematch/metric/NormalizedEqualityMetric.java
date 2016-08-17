@@ -1,13 +1,13 @@
 package com.sleepycoders.imagematch.metric;
 
-import java.awt.image.BufferedImage;
+import com.sleepycoders.imagematch.image.Image;
 
 /**
  * @author Joshua Moody (joshimoo@hotmail.de)
  */
 public class NormalizedEqualityMetric implements IMetric {
     @Override
-    public float calculate(BufferedImage a, BufferedImage b) {
+    public float calculate(Image a, Image b) {
         if(a.getWidth() != b.getWidth() || a.getHeight() != b.getHeight()) {
             throw new IllegalArgumentException("can only calculate metric on same size images");
         }

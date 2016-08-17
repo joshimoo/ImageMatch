@@ -1,6 +1,7 @@
 package com.sleepycoders.imagematch.matcher;
 
-import java.awt.image.BufferedImage;
+import com.sleepycoders.imagematch.image.Image;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -10,6 +11,6 @@ import java.util.List;
 public interface IMatcher {
     List<MatchResult> NO_MATCH = Collections.emptyList();
 
-    List<MatchResult> match(final BufferedImage src, final BufferedImage sub);
-    List<MatchResult> match(final BufferedImage src, final BufferedImage sub, final float likenessThreshold);
+    List<MatchResult> match(final Image src, final Image sub);
+    List<MatchResult> match(final Image src, final Image sub, final float likenessThreshold);
 }

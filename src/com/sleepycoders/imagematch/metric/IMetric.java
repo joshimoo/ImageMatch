@@ -1,10 +1,10 @@
 package com.sleepycoders.imagematch.metric;
 
-import java.awt.image.BufferedImage;
+import com.sleepycoders.imagematch.image.Image;
 
 /**
  * @author Joshua Moody (joshimoo@hotmail.de)
  */
 public interface IMetric {
-    float calculate(final BufferedImage a, final BufferedImage b);
+    float calculate(final Image a, final Image b);
 }

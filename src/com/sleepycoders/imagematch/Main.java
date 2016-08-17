@@ -1,5 +1,6 @@
 package com.sleepycoders.imagematch;
 
+import com.sleepycoders.imagematch.image.Image;
 import com.sleepycoders.imagematch.matcher.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         // verify args
         if(args.length < 2) {
@@ -18,11 +19,15 @@ public class Main {
         }
 
         // load images
-        BufferedImage src = loadImage(args[0]);
-        BufferedImage sub = loadImage(args[1]);
+        Image src = new Image(loadImage(args[0]));
+        Image sub = new Image(loadImage(args[1]));
+        BufferedImage out = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_RGB);
 
-        IMatcher matcher = new NaivMatcher();
-        List<MatchResult> matches = matcher.match(src, sub, 1);
+        IMatcher matcher = new CorrelationMatcher();
+        List<MatchResult> matches = matcher.match(src, sub);
+
+        // sort the match results based on likeness descendingly
+        matches.sort( (a,b) -> a.likeness > b.likeness ? -1 : a.likeness < b.likeness ? 1 : 0 );
         for (MatchResult r : matches) {
             System.out.println(r.toString());
         }
