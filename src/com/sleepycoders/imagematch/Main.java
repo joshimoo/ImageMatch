@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -27,7 +28,7 @@ public class Main {
         List<MatchResult> matches = matcher.match(src, sub);
 
         // sort the match results based on likeness descendingly
-        matches.sort( (a,b) -> a.likeness > b.likeness ? -1 : a.likeness < b.likeness ? 1 : 0 );
+        matches.sort(Comparator.comparing((MatchResult m) -> m.likeness).reversed());
         for (MatchResult r : matches) {
             System.out.println(r.toString());
         }

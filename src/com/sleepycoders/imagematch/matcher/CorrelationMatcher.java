@@ -56,7 +56,7 @@ public class CorrelationMatcher implements IMatcher {
         // - closest valid neighbour
         // - wraparound to other side of image
         // - mirror coordinates
-        System.out.println("pixel-ops: " + ((long)((h-kh) * (w-kw)) * (kw * kh)) );
+        System.out.println("pixel-ops: " + ((long)((h-kh+1) * (w-kw+1)) * (kw * kh)));
         for (int y = 0; y <= h - kh; y++) {
             for (int x = 0; x <= w - kw; x++) {
                 // does not copy, instead just provides a sliced view on the underlying data
