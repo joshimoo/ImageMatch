@@ -1,5 +1,6 @@
 package com.sleepycoders.imagematch;
 
+import com.sleepycoders.imagematch.effect.Effect;
 import com.sleepycoders.imagematch.image.Image;
 import com.sleepycoders.imagematch.matcher.*;
 import javax.imageio.ImageIO;
@@ -49,6 +50,12 @@ public class Main {
         } else {
             System.out.println("could not find any matches for image \ntry lowering likenessThreshold");
         }
+
+        // TODO: let's try some filters & effects
+        if(args.length > 3) {
+            Effect.apply(src, Effect.sepiaEffect);
+            writeImage(src, args[3]);
+        }
     }
 
     public static BufferedImage loadImage(final String path) {
@@ -73,5 +80,17 @@ public class Main {
             e.printStackTrace();
             System.err.println("image: " + path + " could not be written");
         }
+    }
+
+    public static void writeImage(final Image img, final String path) {
+        // because of lazyness we convert to BufferedImage and use the existing ImageIO stuff
+        BufferedImage out = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+        for (int y = 0; y < img.getHeight(); y++) {
+            for (int x = 0; x < img.getWidth(); x++) {
+                out.setRGB(x, y, img.getRGB(x, y));
+            }
+        }
+
+        writeImage(out, path);
     }
 }
