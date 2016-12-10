@@ -1,0 +1,4 @@
+test-small.bmp 	offset: 266x361 size: 64x64
+test-small.png	offset: 266x361 size: 64x64
+test-sub.bmp	offset: 204x181 size: 312x280
+test-sub.png 	offset: 204x181 size: 312x280
