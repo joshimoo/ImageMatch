@@ -1,6 +1,8 @@
 # ImageMatch
 ImageMatch tries to evaluate whether one image is a sub image of another image
 It support a diverse set of matching algorithms from a simple full search to a histogram approach as well as keypoint based matching.
+[![CircleCI](https://circleci.com/gh/joshimoo/ImageMatch.svg?style=shield)](https://circleci.com/gh/joshimoo/ImageMatch)
+
 
 ## Design Decisions
 since java's awt BufferedImage was to [slow](doc/img/profiling-before.png) for a big amount of getRGB calls.
