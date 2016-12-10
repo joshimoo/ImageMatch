@@ -6,7 +6,7 @@
 
     <groupId>com.sleepycoders.imagematch</groupId>
     <artifactId>ImageMatch</artifactId>
-    <version>0.4-SNAPSHOT</version>
+    <version>0.4</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
